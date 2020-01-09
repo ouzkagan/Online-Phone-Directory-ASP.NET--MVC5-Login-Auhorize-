@@ -1,0 +1,226 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="TRDBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Department">
+          <Key>
+            <PropertyRef Name="dep_id" />
+          </Key>
+          <Property Name="dep_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="dep_name" Type="nvarchar" MaxLength="25" />
+        </EntityType>
+        <EntityType Name="Emp_Man">
+          <Key>
+            <PropertyRef Name="man_id" />
+          </Key>
+          <Property Name="man_id" Type="int" Nullable="false" />
+          <Property Name="emp_id" Type="int" />
+        </EntityType>
+        <EntityType Name="EMPLOYEE">
+          <Key>
+            <PropertyRef Name="emp_id" />
+          </Key>
+          <Property Name="emp_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="fname" Type="varchar" MaxLength="25" />
+          <Property Name="sname" Type="varchar" MaxLength="25" />
+          <Property Name="mng_id" Type="int" />
+          <Property Name="dep_id" Type="int" />
+          <Property Name="tel" Type="nvarchar" MaxLength="20" />
+        </EntityType>
+        <EntityType Name="Users">
+          <Key>
+            <PropertyRef Name="u_id" />
+          </Key>
+          <Property Name="u_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="username" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="pass" Type="varchar" MaxLength="20" Nullable="false" />
+        </EntityType>
+        <Association Name="FK__EMPLOYEE__dep_id__15502E78">
+          <End Role="Department" Type="Self.Department" Multiplicity="0..1" />
+          <End Role="EMPLOYEE" Type="Self.EMPLOYEE" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Department">
+              <PropertyRef Name="dep_id" />
+            </Principal>
+            <Dependent Role="EMPLOYEE">
+              <PropertyRef Name="dep_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="TRDBModelStoreContainer">
+          <EntitySet Name="Department" EntityType="Self.Department" Schema="TRDB" store:Type="Tables" />
+          <EntitySet Name="Emp_Man" EntityType="Self.Emp_Man" Schema="TRDB" store:Type="Tables" />
+          <EntitySet Name="EMPLOYEE" EntityType="Self.EMPLOYEE" Schema="TRDB" store:Type="Tables" />
+          <EntitySet Name="Users" EntityType="Self.Users" Schema="TRDB" store:Type="Tables" />
+          <AssociationSet Name="FK__EMPLOYEE__dep_id__15502E78" Association="Self.FK__EMPLOYEE__dep_id__15502E78">
+            <End Role="Department" EntitySet="Department" />
+            <End Role="EMPLOYEE" EntitySet="EMPLOYEE" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="TRDBModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Department">
+          <Key>
+            <PropertyRef Name="dep_id" />
+          </Key>
+          <Property Name="dep_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="dep_name" Type="String" MaxLength="25" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="EMPLOYEE" Relationship="Self.FK__EMPLOYEE__dep_id__15502E78" FromRole="Department" ToRole="EMPLOYEE" />
+        </EntityType>
+        <EntityType Name="EMPLOYEE">
+          <Key>
+            <PropertyRef Name="emp_id" />
+          </Key>
+          <Property Name="emp_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="fname" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
+          <Property Name="sname" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
+          <Property Name="mng_id" Type="Int32" />
+          <Property Name="dep_id" Type="Int32" />
+          <Property Name="tel" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Department" Relationship="Self.FK__EMPLOYEE__dep_id__15502E78" FromRole="EMPLOYEE" ToRole="Department" />
+          <NavigationProperty Name="Emp_Man" Relationship="TRDBModel.FK__Emp_Man__emp_id__398D8EEE" FromRole="EMPLOYEE" ToRole="Emp_Man" />
+          <NavigationProperty Name="Emp_Man1" Relationship="TRDBModel.FK__EMPLOYEE__mng_id__3A81B327" FromRole="EMPLOYEE" ToRole="Emp_Man" />
+        </EntityType>
+        <EntityType Name="Users">
+          <Key>
+            <PropertyRef Name="u_id" />
+          </Key>
+          <Property Name="u_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="username" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="pass" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+        </EntityType>
+        <Association Name="FK__EMPLOYEE__dep_id__15502E78">
+          <End Role="Department" Type="Self.Department" Multiplicity="0..1" />
+          <End Role="EMPLOYEE" Type="Self.EMPLOYEE" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Department">
+              <PropertyRef Name="dep_id" />
+            </Principal>
+            <Dependent Role="EMPLOYEE">
+              <PropertyRef Name="dep_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="TRDBEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Department" EntityType="Self.Department" />
+          <EntitySet Name="EMPLOYEE" EntityType="Self.EMPLOYEE" />
+          <EntitySet Name="Users" EntityType="Self.Users" />
+          <AssociationSet Name="FK__EMPLOYEE__dep_id__15502E78" Association="Self.FK__EMPLOYEE__dep_id__15502E78">
+            <End Role="Department" EntitySet="Department" />
+            <End Role="EMPLOYEE" EntitySet="EMPLOYEE" />
+          </AssociationSet>
+          <EntitySet Name="Emp_Man" EntityType="TRDBModel.Emp_Man" />
+          <AssociationSet Name="FK__Emp_Man__emp_id__398D8EEE" Association="TRDBModel.FK__Emp_Man__emp_id__398D8EEE">
+            <End Role="EMPLOYEE" EntitySet="EMPLOYEE" />
+            <End Role="Emp_Man" EntitySet="Emp_Man" />
+          </AssociationSet>
+          <AssociationSet Name="FK__EMPLOYEE__mng_id__3A81B327" Association="TRDBModel.FK__EMPLOYEE__mng_id__3A81B327">
+            <End Role="Emp_Man" EntitySet="Emp_Man" />
+            <End Role="EMPLOYEE" EntitySet="EMPLOYEE" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="Emp_Man">
+          <Key>
+            <PropertyRef Name="man_id" />
+          </Key>
+          <Property Name="man_id" Type="Int32" Nullable="false" />
+          <Property Name="emp_id" Type="Int32" />
+          <NavigationProperty Name="EMPLOYEE" Relationship="TRDBModel.FK__Emp_Man__emp_id__398D8EEE" FromRole="Emp_Man" ToRole="EMPLOYEE" />
+          <NavigationProperty Name="EMPLOYEE1" Relationship="TRDBModel.FK__EMPLOYEE__mng_id__3A81B327" FromRole="Emp_Man" ToRole="EMPLOYEE" />
+        </EntityType>
+        <Association Name="FK__Emp_Man__emp_id__398D8EEE">
+          <End Type="TRDBModel.EMPLOYEE" Role="EMPLOYEE" Multiplicity="0..1" />
+          <End Type="TRDBModel.Emp_Man" Role="Emp_Man" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="EMPLOYEE">
+              <PropertyRef Name="emp_id" />
+            </Principal>
+            <Dependent Role="Emp_Man">
+              <PropertyRef Name="emp_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__EMPLOYEE__mng_id__3A81B327">
+          <End Type="TRDBModel.Emp_Man" Role="Emp_Man" Multiplicity="0..1" />
+          <End Type="TRDBModel.EMPLOYEE" Role="EMPLOYEE" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Emp_Man">
+              <PropertyRef Name="man_id" />
+            </Principal>
+            <Dependent Role="EMPLOYEE">
+              <PropertyRef Name="mng_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="TRDBModelStoreContainer" CdmEntityContainer="TRDBEntities">
+          <EntitySetMapping Name="Department">
+            <EntityTypeMapping TypeName="TRDBModel.Department">
+              <MappingFragment StoreEntitySet="Department">
+                <ScalarProperty Name="dep_id" ColumnName="dep_id" />
+                <ScalarProperty Name="dep_name" ColumnName="dep_name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="EMPLOYEE">
+            <EntityTypeMapping TypeName="TRDBModel.EMPLOYEE">
+              <MappingFragment StoreEntitySet="EMPLOYEE">
+                <ScalarProperty Name="emp_id" ColumnName="emp_id" />
+                <ScalarProperty Name="fname" ColumnName="fname" />
+                <ScalarProperty Name="sname" ColumnName="sname" />
+                <ScalarProperty Name="mng_id" ColumnName="mng_id" />
+                <ScalarProperty Name="dep_id" ColumnName="dep_id" />
+                <ScalarProperty Name="tel" ColumnName="tel" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Users">
+            <EntityTypeMapping TypeName="TRDBModel.Users">
+              <MappingFragment StoreEntitySet="Users">
+                <ScalarProperty Name="u_id" ColumnName="u_id" />
+                <ScalarProperty Name="username" ColumnName="username" />
+                <ScalarProperty Name="pass" ColumnName="pass" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Emp_Man">
+            <EntityTypeMapping TypeName="TRDBModel.Emp_Man">
+              <MappingFragment StoreEntitySet="Emp_Man">
+                <ScalarProperty Name="emp_id" ColumnName="emp_id" />
+                <ScalarProperty Name="man_id" ColumnName="man_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

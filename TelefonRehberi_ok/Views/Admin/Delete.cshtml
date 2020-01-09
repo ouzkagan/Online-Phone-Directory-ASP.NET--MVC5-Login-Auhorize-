@@ -1,0 +1,61 @@
+﻿@model TelefonRehberi_ok.Models.EMPLOYEE
+
+@{
+    ViewBag.Title = "Delete";
+}
+
+<h2>Delete</h2>
+
+<h3>Are you sure you want to delete this?</h3>
+<h2>Details</h2>
+
+<div class="container">
+    <div class="row">
+        <div class="col-xs-12 col-sm-6 col-md-6">
+            <div class="well well-sm">
+                <div class="row">
+                    <div class="col-sm-6 col-md-4">
+
+                    </div>
+                    <div class="col-sm-6 col-md-8">
+                        <h4>
+                            @Html.DisplayFor(model => model.fname) @Html.DisplayFor(model => model.sname)
+                        </h4>
+                        <small>
+                            <cite title="İstanbul, TR">
+                                İstanbul, TR <i class="glyphicon glyphicon-map-marker">
+                                </i>
+                            </cite>
+                        </small>
+                        <p>
+                            <i class="glyphicon glyphicon-envelope"></i>email@example.com
+                            <br />
+                            <i class="glyphicon glyphicon-phone"></i>@Html.DisplayFor(model => model.tel)
+                            <br />
+                            <i class="glyphicon glyphicon-gift"></i>June 02, 1988
+                            <br />
+                            <i class="glyphicon glyphicon-gift"></i>@Html.DisplayFor(model => model.mng_id)
+                            <br />
+                            <i class="glyphicon glyphicon-gift"></i>@Html.DisplayFor(model => model.Department.dep_name)
+                        </p>
+                        <!-- Split button -->
+
+                        @Html.ActionLink("Edit", "Edit", new { id = Model.emp_id }, new { @class = "btn btn-primary" })
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-actions no-color">
+        <input type="submit" value="Delete" class="btn btn-default" /> |
+        @Html.ActionLink("Back to List", "Index")
+    </div>
+}
+</div>

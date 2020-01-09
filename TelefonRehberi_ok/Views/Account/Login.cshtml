@@ -1,0 +1,49 @@
+﻿@model TelefonRehberi_ok.Models.Users
+
+@{
+    ViewBag.Title = "Login";
+}
+
+@Styles.Render("~/Content/login.css")
+
+
+<div id="login">
+    <h3 class="text-center text-white pt-5">Login form</h3>
+    <div class="container">
+        <div id="login-row" class="row justify-content-center align-items-center">
+            <div id="login-column" class="col-md-6">
+                <div id="login-box" class="col-md-12">
+                    @using (Html.BeginForm("login", "Account", new { @class = "form" }, FormMethod.Post))
+                    {
+
+                            <h3 class="text-center text-info mt-2 mb-2">Giriş Yap</h3>
+
+                            <div class="form-group">
+                                <label for="username" class="text-info">Username:</label><br>
+
+                                @Html.EditorFor(model => model.username, new { htmlAttributes = new { @class = "form-control", placeholder = "admin/manager"  } })
+                                @Html.ValidationMessageFor(model => model.username, "", new { @class = "text-danger" })
+
+                            </div>
+                            <div class="form-group">
+                                <label for="password" class="text-info">Password:</label><br>
+                                @Html.EditorFor(model => model.pass, new { htmlAttributes = new { @class = "form-control", placeholder = "password" } })
+                                @Html.ValidationMessageFor(model => model.pass, "", new { @class = "text-danger" })
+                            </div>
+
+                            <div class="form-group">
+
+                                <input type="submit" value="Giriş Yap" class="btn btn-info btn-md" />
+                            </div>
+                            <div id="register-link" class="text-right">
+                                <a href="#" class="text-info">Şifremi Unuttum.</a>
+                            </div>
+                            <div class="mt-2 mb-2">@ViewBag.msg</div>
+                            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                        
+                    }
+                    </div>
+            </div>
+        </div>
+    </div>
+</div>

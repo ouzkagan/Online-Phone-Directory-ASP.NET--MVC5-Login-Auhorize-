@@ -1,0 +1,61 @@
+﻿@model IEnumerable<TelefonRehberi_ok.Models.EMPLOYEE>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+@Styles.Render("~/Content/tablecss/main.css")
+@Styles.Render("~/Content/tablecss/perfect-scrollbar.css")
+
+
+
+
+<div class="limiter">
+
+    <div class="container-table100">
+        <h2>AdminUI Eleman Listesi</h2>
+        
+        <div class="wrap-table100">
+            <div class="table100 ver5 m-b-110">
+                <div class="table100-head">
+
+                    <table>
+                        <thead>
+                            <tr class="row100 head">
+                                <th class="cell100 column1">Eleman Adı</th>
+                                <th class="cell100 column2">Manager ID</th>
+                                <th class="cell100 column3">Telefon Numarası</th>
+                                <th class="cell100 column4">Departman</th>
+                                <th class="cell100 column5">Detay</th>
+                            </tr>
+                        </thead>
+                    </table>
+                </div>
+
+                <div class="table100-body js-pscroll">
+                    <table>
+                        <tbody>
+                            @foreach (var item in Model)
+                            {
+                                <tr class="row100 body">
+                                    <td class="cell100 column1">@Html.DisplayFor(modelItem => item.fname) @Html.DisplayFor(modelItem => item.sname)</td>
+                                    <td class="cell100 column2">@Html.DisplayFor(modelItem => item.mng_id)</td>
+                                    <td class="cell100 column3">@Html.DisplayFor(modelItem => item.tel)</td>
+                                    <td class="cell100 column4">@Html.DisplayFor(modelItem => item.Department.dep_name)</td>
+                                    <td class="cell100 column5 text-nowrap">
+
+                                        @Html.ActionLink("Düzenle", "Edit", new { id = item.emp_id }, new { @class = "btn btn-outline-primary btn-sm" }) |
+                                        @Html.ActionLink("Ayrıntılar", "Details", "Admin", new { id = item.emp_id }, new { @class = "btn btn-outline-secondary btn-sm" }) |
+                                        @Html.ActionLink("Sil", "Delete", new { id = item.emp_id }, new { @class = "btn btn-outline-danger btn-sm" })
+                                    </td>
+                                </tr>
+                            }
+
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+@Scripts.Render("~/Content/tablecss/perfect-scrollbar.min.js")
